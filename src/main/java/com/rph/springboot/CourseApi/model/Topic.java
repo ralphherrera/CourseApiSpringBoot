@@ -1,13 +1,22 @@
 package com.rph.springboot.CourseApi.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Topic {
 	
-	private int id;
+	@Id
+	@GeneratedValue
+	private Integer id;
+	
 	private String name;
+	
 	private String description;
 	
 	public Topic() {
-
+		
 	}
 	
 	/**
@@ -21,24 +30,30 @@ public class Topic {
 		this.name = name;
 		this.description = description;
 	}
-	
-	public int getId() {
+
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+
+	public void setId(Integer id) {
 		this.id = id;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public String getDescription() {
 		return description;
 	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
 
 }
