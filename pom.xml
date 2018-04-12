@@ -57,9 +57,10 @@
 			<scope>test</scope>
 		</dependency>
 		
+		<!-- Embedded DB -->
 		<dependency>
-			<groupId>org.apache.derby</groupId>
-			<artifactId>derby</artifactId>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
 			<scope>runtime</scope>
 		</dependency>
 	</dependencies>

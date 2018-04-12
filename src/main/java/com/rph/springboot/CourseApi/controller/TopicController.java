@@ -31,17 +31,17 @@ public class TopicController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public void addTopic(@RequestBody Topic topic) {
+	public void doAddTopic(@RequestBody Topic topic) {
 		topicService.saveTopic(topic);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public void editTopic(@RequestBody Topic topic, @PathVariable int id) {
+	public void doEditTopic(@RequestBody Topic topic, @PathVariable int id) {
 		topicService.updateTopic(id, topic);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public void removeTopic(@PathVariable int id) {
+	public void doDeleteTopic(@PathVariable int id) {
 		topicService.deleteTopic(id);
 	}
 }

@@ -1,16 +1,13 @@
 package com.rph.springboot.CourseApi.model;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
-public class Topic {
-	
+public class Course {
+
 	@Id
 	@GeneratedValue
 	private Integer id;
@@ -19,29 +16,32 @@ public class Topic {
 	
 	private String description;
 	
-//	private List<Course> courses;
+	@ManyToOne
+	private Topic topic;
 	
-	public Topic() {
+	public Course() {
 		// Default constructor
 	}
-	
+
 	/**
 	 * @param id
 	 * @param name
 	 * @param description
+	 * @param topic
 	 */
-	public Topic(int id, String name, String description) {
+	public Course(Integer id, String name, String description, int topicId) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
+		this.topic = new Topic(topicId, "", "");
 	}
 
 	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Integer id) { 
 		this.id = id;
 	}
 
@@ -61,4 +61,12 @@ public class Topic {
 		this.description = description;
 	}
 
+	public Topic getTopic() {
+		return topic;
+	}
+
+	public void setTopic(Topic topic) {
+		this.topic = topic;
+	}
+	
 }
