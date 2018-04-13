@@ -5,21 +5,25 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Topic {
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
 	private String name;
 	
 	private String description;
 	
-//	private List<Course> courses;
+	@OneToMany(mappedBy = "topic", cascade=CascadeType.REMOVE)
+	private List<Course> courses;
 	
 	public Topic() {
 		// Default constructor
@@ -35,6 +39,20 @@ public class Topic {
 		this.id = id;
 		this.name = name;
 		this.description = description;
+	}
+
+	/**
+	 * @param id
+	 * @param name
+	 * @param description
+	 * @param courses
+	 */
+	public Topic(Integer id, String name, String description, List<Course> courses) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.courses = courses;
 	}
 
 	public Integer getId() {
@@ -59,6 +77,15 @@ public class Topic {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	@JsonIgnore
+	public List<Course> getCourses() {
+		return courses;
+	}
+
+	public void setCourses(List<Course> courses) {
+		this.courses = courses;
 	}
 
 }

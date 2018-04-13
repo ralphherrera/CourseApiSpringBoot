@@ -2,6 +2,7 @@ package com.rph.springboot.CourseApi.service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 
@@ -26,33 +27,53 @@ public class InitDbService {
 	public void init() {
 		
 		if (topicRepository.findAll().isEmpty()) {
-			ArrayList<Topic> testDataTopicList = new ArrayList<>(Arrays.asList(
-					new Topic(1, "Topic one", "Topic one description"), new Topic(2, "Topic two", "Topic two description"),
-					new Topic(3, "Topic three", "Topic three description")));
-		
-			topicRepository.saveAll(testDataTopicList);
+			List<Topic> testDataTopicList = new ArrayList<>();
+			
+			Topic topicOne = new Topic();
+			topicOne.setName("Topic One Namae");
+			topicOne.setDescription("Topic One Description");
+			
+			Topic topicTwo = new Topic();
+			topicTwo.setName("Topic Two Namae");
+			topicTwo.setDescription("Topic Two Description");
+			
+			Topic topicThree = new Topic();
+			topicThree.setName("Topic Three Namae");
+			topicThree.setDescription("Topic Three Description");
+
+			List<Course> testDataCourseList = new ArrayList<>();
 			
 			Course courseOne = new Course();
-			courseOne.setId(1);
 			courseOne.setName("Course One");
 			courseOne.setDescription("Course One Description");
-			courseOne.setTopic(testDataTopicList.get(0));
 			
 			Course courseTwo = new Course();
-			courseTwo.setId(2);
 			courseTwo.setName("Course Two");
 			courseTwo.setDescription("Course Two Description");
-			courseTwo.setTopic(testDataTopicList.get(1));
 			
 			Course courseThree = new Course();
-			courseThree.setId(1);
 			courseThree.setName("Course Three");
 			courseThree.setDescription("Course Three Description");
-			courseThree.setTopic(testDataTopicList.get(2));
 			
-			courseRepository.save(courseOne);
-			courseRepository.save(courseTwo);
-			courseRepository.save(courseThree);
+			topicOne.setCourses(testDataCourseList);
+			topicOne.setCourses(testDataCourseList);
+			topicTwo.setCourses(testDataCourseList);
+			topicThree.setCourses(testDataCourseList);
+			
+			testDataTopicList.add(topicOne);
+			testDataTopicList.add(topicTwo);
+			testDataTopicList.add(topicThree);
+			
+			testDataCourseList.add(courseOne);
+			testDataCourseList.add(courseTwo);
+			testDataCourseList.add(courseThree);
+			
+			courseOne.setTopic(topicOne);
+			courseTwo.setTopic(topicTwo);
+			courseThree.setTopic(topicThree);
+			
+			topicRepository.saveAll(testDataTopicList);
+			courseRepository.saveAll(testDataCourseList);
 		}
 	}
 }

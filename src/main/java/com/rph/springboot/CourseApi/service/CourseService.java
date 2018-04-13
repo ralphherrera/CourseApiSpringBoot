@@ -6,14 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rph.springboot.CourseApi.model.Course;
-import com.rph.springboot.CourseApi.model.Topic;
 import com.rph.springboot.CourseApi.repository.CourseRepository;
+import com.rph.springboot.CourseApi.repository.TopicRepository;
 
 @Service
 public class CourseService {
 	
 	@Autowired
 	private CourseRepository courseRepository;
+	
+	@Autowired
+	private TopicRepository topicRepository;
 
 	public List<Course> getAllCourse(int topicId) {
 		return courseRepository.findByTopicId(topicId);
@@ -24,12 +27,12 @@ public class CourseService {
 	}
 	
 	public void saveCourse(int topicId, Course course) {
-		course.setTopic(new Topic(topicId, "", ""));
+		course.setTopic(topicRepository.findById(topicId));
 		courseRepository.save(course);
 	}
 
 	public void updateTopic(int topicId, Course course) {
-		course.setTopic(new Topic(topicId, "", ""));
+		course.setTopic(topicRepository.findById(topicId));
 		courseRepository.save(course);
 	}
 

@@ -6,6 +6,6 @@ import com.rph.springboot.CourseApi.model.Topic;
 
 public interface TopicRepository extends JpaRepository<Topic, Integer> {
 	
-	Topic findById(int id);
+	public Topic findById(int id);
 
 }

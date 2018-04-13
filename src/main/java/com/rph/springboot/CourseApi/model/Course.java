@@ -2,14 +2,16 @@ package com.rph.springboot.CourseApi.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
 public class Course {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
 	private String name;
@@ -17,6 +19,7 @@ public class Course {
 	private String description;
 	
 	@ManyToOne
+	@JoinColumn(name = "topic_id")
 	private Topic topic;
 	
 	public Course() {
@@ -29,12 +32,12 @@ public class Course {
 	 * @param description
 	 * @param topic
 	 */
-	public Course(Integer id, String name, String description, int topicId) {
+	public Course(Integer id, String name, String description, Topic topic) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
-		this.topic = new Topic(topicId, "", "");
+		this.topic = topic;
 	}
 
 	public Integer getId() {
